@@ -74,3 +74,55 @@ And return an array of all available time slots where the meeting can be schedul
 - Bookings and Available Slots can only exist inside working hours
 - Time slots should be returned in chronological order
 - Include edge cases where a slot might start at the exact end of a working period
+
+
+## My Approach:
+For this challenge, I implemented a structured approach to find all available meeting slots:
+
+### Step 1: Time Conversion
+I created helper functions to convert between HHMM format (e.g., 1430 for 2:30 PM) and minutes since midnight. This simplifies all time calculations.
+
+```javascript
+// Convert 1430 → 870 minutes (14 hours × 60 + 30 minutes)
+function toMinutes(time) {
+  const hours = Math.floor(time / 100);
+  const minutes = time % 100;
+  return hours * 60 + minutes;
+}
+
+// Convert back: 870 minutes → 1430
+function toHHMM(minutes) {
+  const hrs = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return hrs * 100 + mins;
+}
+```
+
+### Step 2: Validate Input
+Ensure that working hours do not overlap.
+The meeting duration is greater than 0.
+
+### Step 3: Merge Bookings
+For each working period, I filter the bookings that fall within the period and merge any overlapping or adjacent bookings. This creates a clean list of "busy times."
+
+### Step 4: Find Free Intervals
+Using the merged bookings, I identify gaps of free time between the busy periods and the boundaries of the working hours.
+
+### Step 5: Process Each Working Period
+For each working period:
+
+- Filter bookings that overlap with the period.
+- Merge overlapping bookings.
+- Generate free intervals and split them into slots of the exact meeting duration.
+
+This gives us all possible start times for meetings that fit perfectly within the free intervals.
+
+## Why This Solution Works Well
+1. **Clarity**: The solution is broken into clear, reusable functions (mergeBookings, generateFreeIntervals).
+2. **Efficiency**: By processing one working period at a time and merging bookings, the solution avoids unnecessary complexity.
+3. **Edge Case Handling**: The approach handles:
+   - Bookings that span across working periods.
+   - Meetings that fit exactly at the end of working hours.
+   - Overlapping or adjacent bookings.
+
+The final output is a sorted array of all possible meeting slots of the requested duration, ensuring they fit within the working hours and do not overlap with existing bookings.
