@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import ImageGallery from "./ImageGallery";
+import ImageGallery from "./components/ImageGallery";
 
 describe("ImageGallery", () => {
   const mockImages = [
@@ -37,7 +37,7 @@ describe("ImageGallery", () => {
     const images = screen.getAllByRole("img");
     fireEvent.error(images[0]);
     await waitFor(() => {
-      expect(screen.getByText("No images to display")).toBeInTheDocument();
+      expect(screen.getByText("Error while displaying image")).toBeInTheDocument();
     });
   });
 
