@@ -63,3 +63,38 @@ const grid = [
 - Implement a solution that finds the shortest path
 - Add support for diagonal moves
 - Implement memoization to optimize the solution
+
+
+# MY APPROACH
+
+## Main Solution: `findAllPaths()`
+I used a **backtracking approach** to find all possible paths from the top-left to the bottom-right corner of the grid:
+
+- **Grid Check**: First, I make sure the grid is valid and that the start and end points are not blocked.
+- **Recursive Exploration**: I created a function that:
+  - Checks if we're out of bounds, on a blocked cell, or reached the destination.
+  - Keeps track of the current path using a list of coordinates.
+  - Marks cells as visited so we don't go back and forth on the same path.
+  - Explores two possible directions: right and down (I added diagonal moves in the extended solution).
+  - When backtracking, it undoes the last step.
+
+The function collects all valid paths and returns them in a list.
+
+## Bonus Features
+
+### Finding the Shortest Path: `findShortestPath()`
+This function first finds all paths using `findAllPaths()`, then picks the shortest path by comparing their lengths. The shortest path is the one with the least number of steps.
+
+### Adding Diagonal Moves: `findAllPathsWithDiagonals()`
+In this version, I added an extra move to go diagonally down-right. This means the function checks right, down, and diagonal directions to explore more possible paths.
+
+### Using Memoization: `findAllPathsMemoized()`
+To make the solution faster, I added **memoization** using a **Map**. This stores already calculated paths for each cell. So if we visit a cell again, the function uses the stored result instead of calculating it again.
+
+## Error Handling
+The solution checks for errors in these cases:
+- **Empty grids**: If the grid is empty or doesn’t have valid rows or columns, an error is thrown.
+- **Invalid grids**: It checks that the start and end points are not blocked. If they are, it throws an error.
+- **Blocked or out-of-bounds cells**: The solution ensures no invalid moves are made during the pathfinding.
+
+This solution works well for finding all paths or the shortest path, depending on the need. The backtracking method is good for exploring all possible routes when every option needs to be considered.
