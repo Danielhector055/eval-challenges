@@ -95,3 +95,11 @@ You can download and view the demo video here:
 ### Note
 
 I have renamed the parent component to `App`, which passes the required props like `images` to the child `ImageGallery` component.
+
+## Running Tests
+
+To run the tests for Challenge 3 only, use the following command:
+
+```bash
+npx jest challenge-3-image-gallery/test.tsx
+```
