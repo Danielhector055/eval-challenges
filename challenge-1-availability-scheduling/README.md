@@ -75,11 +75,12 @@ And return an array of all available time slots where the meeting can be schedul
 - Time slots should be returned in chronological order
 - Include edge cases where a slot might start at the exact end of a working period
 
-
 ## My Approach:
+
 For this challenge, I implemented a structured approach to find all available meeting slots:
 
 ### Step 1: Time Conversion
+
 I created helper functions to convert between HHMM format (e.g., 1430 for 2:30 PM) and minutes since midnight. This simplifies all time calculations.
 
 ```javascript
@@ -99,16 +100,20 @@ function toHHMM(minutes) {
 ```
 
 ### Step 2: Validate Input
+
 Ensure that working hours do not overlap.
 The meeting duration is greater than 0.
 
 ### Step 3: Merge Bookings
+
 For each working period, I filter the bookings that fall within the period and merge any overlapping or adjacent bookings. This creates a clean list of "busy times."
 
 ### Step 4: Find Free Intervals
+
 Using the merged bookings, I identify gaps of free time between the busy periods and the boundaries of the working hours.
 
 ### Step 5: Process Each Working Period
+
 For each working period:
 
 - Filter bookings that overlap with the period.
@@ -118,6 +123,7 @@ For each working period:
 This gives us all possible start times for meetings that fit perfectly within the free intervals.
 
 ## Why This Solution Works Well
+
 1. **Clarity**: The solution is broken into clear, reusable functions (mergeBookings, generateFreeIntervals).
 2. **Efficiency**: By processing one working period at a time and merging bookings, the solution avoids unnecessary complexity.
 3. **Edge Case Handling**: The approach handles:
@@ -126,3 +132,11 @@ This gives us all possible start times for meetings that fit perfectly within th
    - Overlapping or adjacent bookings.
 
 The final output is a sorted array of all possible meeting slots of the requested duration, ensuring they fit within the working hours and do not overlap with existing bookings.
+
+## Running Tests
+
+To run the tests for Challenge 1 only, use the following command:
+
+```bash
+npx jest challenge-1-availability-scheduling/test.js
+```
