@@ -98,3 +98,11 @@ The solution checks for errors in these cases:
 - **Blocked or out-of-bounds cells**: The solution ensures no invalid moves are made during the pathfinding.
 
 This solution works well for finding all paths or the shortest path, depending on the need. The backtracking method is good for exploring all possible routes when every option needs to be considered.
+
+## Running Tests
+
+To run the tests for Challenge 2 only, use the following command:
+
+```bash
+npx jest challenge-2-recursion/test.js
+```
